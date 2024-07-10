@@ -1,7 +1,7 @@
 package com.example.service;
 
-import com.example.dao.UserDao;
-import com.example.entity.User;
+import com.example.dao.AdminDao;
+import com.example.entity.Admin;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,9 @@ import java.util.List;
 public class UserService {
 
     @Resource
-    private UserDao userDao; // Controller调用service，service调用dao
+    private AdminDao userDao; // Controller调用service，service调用dao
 
-    public List<User> getUser() {
+    public List<Admin> getUser() {
         return userDao.getUser();
 //        // 3. 使用引入的包
 //        return userDao.selectAll();
