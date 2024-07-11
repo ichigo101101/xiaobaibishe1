@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.service.AdminService;
 import jakarta.annotation.Resource;
@@ -23,14 +24,20 @@ public class AdminController {
     @Resource //引入Java bean
     private AdminService adminService; // Controller调用service，service调用dao
 
-
-    @GetMapping("/start")
-    public  String start(){
-        return "欢迎！springboot启动!";
+    @GetMapping
+    public Result getUser() {
+        List<Admin> list = adminService.getUser();
+        return Result.success(list);
     }
 
-    @GetMapping("/")
-    public List<Admin> getUser() {
-        return adminService.getUser();
-    }
+//    @GetMapping("/start")
+//    public  String start(){
+//        return "欢迎！springboot启动!";
+//    }
+//
+//    @GetMapping("/")
+//    public List<Admin> getUser() {
+//        return adminService.getUser();
+//    }
+
 }
