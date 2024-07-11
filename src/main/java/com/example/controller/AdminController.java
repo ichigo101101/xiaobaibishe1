@@ -1,7 +1,7 @@
 package com.example.controller;
 
 import com.example.entity.Admin;
-import com.example.service.UserService;
+import com.example.service.AdminService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ public class AdminController {
     * */
 
     @Resource //引入Java bean
-    private UserService userService; // Controller调用service，service调用dao
+    private AdminService adminService; // Controller调用service，service调用dao
 
 
     @GetMapping("/start")
@@ -31,6 +31,6 @@ public class AdminController {
 
     @GetMapping("/")
     public List<Admin> getUser() {
-        return userService.getUser();
+        return adminService.getUser();
     }
 }
