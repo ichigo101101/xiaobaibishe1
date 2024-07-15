@@ -5,10 +5,8 @@ import com.example.entity.Params;
 import com.example.service.AdminService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @CrossOrigin
@@ -38,6 +36,22 @@ public class AdminController {
     public Result findBySearch(Params params) {
         PageInfo<Admin> info = adminService.findBySearch(params);
         return Result.success(info);
+    }
+
+    @PostMapping
+    public Result save(@RequestBody Admin admin) {
+        if (admin.getId() == null) {
+            adminService.add(admin);
+        } else {
+            adminService.update(admin);
+        }
+        return Result.success();
+    }
+
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable Integer id) {
+        adminService.delete(id);
+        return Result.success();
     }
 
 

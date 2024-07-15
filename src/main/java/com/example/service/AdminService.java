@@ -27,4 +27,20 @@ public class AdminService {
         List<Admin> list  = adminDao.findBySearch(params);
         return PageInfo.of(list);
     }
+
+    public void add(Admin admin) {
+        // 初始化一个密码
+        if (admin.getPassword() == null) {
+            admin.setPassword("123456");
+        }
+        adminDao.insertSelective(admin);
+    }
+
+    public void update(Admin admin) {
+        adminDao.updateByPrimaryKeySelective(admin);
+    }
+
+    public void delete(Integer id) {
+        adminDao.deleteByPrimaryKey(id);
+    }
 }
