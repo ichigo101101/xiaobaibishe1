@@ -3,6 +3,7 @@ import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.entity.Params;
 import com.example.service.AdminService;
+import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +36,8 @@ public class AdminController {
 
     @GetMapping("/search")
     public Result findBySearch(Params params) {
-        List<Admin> list = adminService.findBySearch(params);
-        return Result.success(list);
+        PageInfo<Admin> info = adminService.findBySearch(params);
+        return Result.success(info);
     }
 
 
