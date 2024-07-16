@@ -20,7 +20,7 @@ public class AdminController {
     /*
     *controller里的一个方法，它其实就是我们平常说的web项目的一个接口的入口
     *可以在这个方法上加一个url
-    * 也可以指定请求方式，GET增 POST删 PUT改 DELETE查
+    * 也可以指定请求方式，GET 查 POST 增 PUT 改 DELETE 删
     * */
 
     @Resource //引入Java bean
