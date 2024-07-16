@@ -2,6 +2,7 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.entity.Params;
+import com.example.exception.CustomException;
 import com.example.service.AdminService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
@@ -26,6 +27,18 @@ public class AdminController {
     @Resource //引入Java bean
     private AdminService adminService; // Controller调用service，service调用dao
 
+    @PostMapping("/login")
+    public Result login(@RequestBody Admin admin) {
+        Admin loginUser = adminService.login(admin);
+        return Result.success(loginUser);
+    }
+
+    @PostMapping("/register")
+    public Result register(@RequestBody Admin admin) {
+        adminService.add(admin);
+        return Result.success();
+    }
+
     @GetMapping
     public Result getUser() {
         List<Admin> list = adminService.getUser();
@@ -40,12 +53,22 @@ public class AdminController {
 
     @PostMapping
     public Result save(@RequestBody Admin admin) {
-        if (admin.getId() == null) {
-            adminService.add(admin);
-        } else {
-            adminService.update(admin);
+//        if (admin.getId() == null) {
+//            adminService.add(admin);
+//        } else {
+//            adminService.update(admin);
+//        }
+//        return Result.success();
+        try {
+            if (admin.getId() == null) {
+                adminService.add(admin);
+            } else {
+                adminService.update(admin);
+            }
+            return Result.success();
+        } catch (CustomException e) {
+            return Result.error(e.getMsg());
         }
-        return Result.success();
     }
 
     @DeleteMapping("/{id}")
