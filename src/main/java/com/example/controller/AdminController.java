@@ -6,6 +6,8 @@ import com.example.exception.CustomException;
 import com.example.service.AdminService;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +25,8 @@ public class AdminController {
     *可以在这个方法上加一个url
     * 也可以指定请求方式，GET 查 POST 增 PUT 改 DELETE 删
     * */
+
+    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
     @Resource //引入Java bean
     private AdminService adminService; // Controller调用service，service调用dao
@@ -60,6 +64,7 @@ public class AdminController {
 
     @GetMapping("/search")
     public Result findBySearch(Params params) {
+        log.info("拦截器已放行，正式调用接口内部，查询管理员信息");
         PageInfo<Admin> info = adminService.findBySearch(params);
         return Result.success(info);
     }

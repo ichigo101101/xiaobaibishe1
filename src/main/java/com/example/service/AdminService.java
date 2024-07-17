@@ -1,4 +1,5 @@
 package com.example.service;
+import com.example.common.JwtTokenUtils;
 import com.example.dao.AdminDao;
 import com.example.entity.Admin;
 import com.example.entity.Params;
@@ -92,8 +93,17 @@ public class AdminService {
             throw new CustomException("ユーザー名またはパスワードが間違っています");
         }
         // 如果查出来了有，那说明确实有这个管理员，而且输入的用户名和密码都对；
+        // 生成jwt token给前端
+        String token = JwtTokenUtils.genToken(user.getId().toString(), user.getPassword());
+        user.setToken(token);
         return user;
     }
+
+    public Admin findById(Integer id) {
+        return adminDao.selectByPrimaryKey(id);
+    }
+
+
 }
 
 
