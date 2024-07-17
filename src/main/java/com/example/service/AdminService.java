@@ -29,23 +29,45 @@ public class AdminService {
         return PageInfo.of(list);
     }
 
+//    public void add(Admin admin) {
+//        //1 用户名一定要有，否则不让新增（后面需要用户名登录）
+//        if (admin.getName() == null || admin.getName().isEmpty()) {
+//            throw new CustomException("用户名不能为空");
+//        }
+//        //2 进行重复性判断 同一名字的管理员不允许重复新增：只要根据用户名去数据库查询一下就就可以了
+//        Admin User = adminDao.findByName(admin.getName());
+//        if (User != null) {
+//            //说明已经有了 这里我们就要提示前台不允许新增另外
+//            throw new CustomException("该用户名已存在，请更换用户名");
+//        }
+//        // 初始化一个密码
+//        if (admin.getPassword() == null || admin.getPassword().isEmpty()) {
+//            admin.setPassword("123456");
+//        }
+//        adminDao.insertSelective(admin);
+//    }
+
     public void add(Admin admin) {
-        //1 用户名一定要有，否则不让新增（后面需要用户名登录）
+        // 用户名不能为空
         if (admin.getName() == null || admin.getName().isEmpty()) {
             throw new CustomException("用户名不能为空");
         }
-        //2 进行重复性判断 同一名字的管理员不允许重复新增：只要根据用户名去数据库查询一下就就可以了
-        Admin User = adminDao.findByName(admin.getName());
-        if (User != null) {
-            //说明已经有了 这里我们就要提示前台不允许新增另外
+
+        // 查询数据库中是否存在相同用户名的管理员
+        Admin existingUser = adminDao.findByName(admin.getName());
+        if (existingUser != null) {
             throw new CustomException("该用户名已存在，请更换用户名");
         }
-        // 初始化一个密码
+
+        // 如果密码为空，设置默认密码
         if (admin.getPassword() == null || admin.getPassword().isEmpty()) {
             admin.setPassword("123456");
         }
+
+        // 执行插入操作
         adminDao.insertSelective(admin);
     }
+
 
     public void update(Admin admin) {
         adminDao.updateByPrimaryKeySelective(admin);

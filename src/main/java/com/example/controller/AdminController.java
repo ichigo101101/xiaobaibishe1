@@ -29,14 +29,27 @@ public class AdminController {
 
     @PostMapping("/login")
     public Result login(@RequestBody Admin admin) {
-        Admin loginUser = adminService.login(admin);
-        return Result.success(loginUser);
+//        Admin loginUser = adminService.login(admin);
+//        return Result.success(loginUser);
+        try {
+            Admin loginUser = adminService.login(admin);
+            return Result.success(loginUser);
+        } catch (CustomException e) {
+            return Result.error(e.getMsg()); // 返回自定义异常信息给前端
+        }
     }
+
 
     @PostMapping("/register")
     public Result register(@RequestBody Admin admin) {
-        adminService.add(admin);
-        return Result.success();
+//        adminService.add(admin);
+//        return Result.success();
+        try {
+            adminService.add(admin);
+            return Result.success();
+        } catch (CustomException e) {
+            return Result.error(e.getMsg()); // 返回自定义异常信息给前端
+        }
     }
 
     @GetMapping
