@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 /**
  * jwt拦截器
@@ -63,4 +64,6 @@ public class JwtInterceptor implements HandlerInterceptor {
         log.info("token验证成功，允许放行");
         return true;
     }
+
+
 }

@@ -3,8 +3,17 @@ package com.example.entity;
 public class Params {
     private String name;
     private String phone;
+    private String author;
     private Integer pageNum;
     private Integer pageSize;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public String getName() {
         return name;
