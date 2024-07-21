@@ -23,7 +23,7 @@ public class AdminController {
     /*
     *controller里的一个方法，它其实就是我们平常说的web项目的一个接口的入口
     *可以在这个方法上加一个url
-    * 也可以指定请求方式，GET 查 POST 增 PUT 改 DELETE 删
+    * 也可以指定请求方式， POST 增  DELETE 删  PUT 改 GET 查
     * */
 
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
