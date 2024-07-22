@@ -36,4 +36,8 @@ public class TypeService {
     public void delete(Integer id) {
         typeDao.deleteByPrimaryKey(id);
     }
+
+    public List<Type> findAll() {
+        return typeDao.selectAll();
+    }
 }

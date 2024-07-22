@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import cn.hutool.core.annotation.Alias;
+
 import javax.persistence.*;
 
 @Table(name = "type")
@@ -9,8 +11,11 @@ public class Type {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Alias("カテゴリー名")
     @Column(name = "name")
     private String name;
+
+    @Alias("カテゴリー説明")
     @Column(name = "description")
     private String description;
 
