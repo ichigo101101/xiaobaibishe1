@@ -23,6 +23,13 @@ public class TypeController {
     @Resource
     private TypeService typeService;
 
+    @GetMapping
+    public Result findAll(){
+        return Result.success(typeService.findAll());
+    }
+
+
+
     @GetMapping("/search")
     public Result findBySearch(Params params) {
         PageInfo<Type> info = typeService.findBySearch(params);
