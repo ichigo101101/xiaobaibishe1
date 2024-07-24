@@ -14,6 +14,7 @@
     <select id="findBySearch" resultType="com.example.entity.Admin">
         select * from admin
         <where>
+            role != 'ROLE_ADMIN'
             <if test="params != null and params.name != null and params.name != ''">
                 and name like concat('%', #{ params.name }, '%')
             </if>
