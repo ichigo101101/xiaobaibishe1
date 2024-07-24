@@ -9,9 +9,6 @@ import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
-
-
-
 @CrossOrigin
 @RestController
 @RequestMapping("/book")
