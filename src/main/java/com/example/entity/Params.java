@@ -6,6 +6,7 @@ public class Params {
     private String author;
     private Integer pageNum;
     private Integer pageSize;
+    private Integer userId;
 
     public String getAuthor() {
         return author;
@@ -45,5 +46,13 @@ public class Params {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
