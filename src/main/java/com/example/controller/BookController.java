@@ -25,6 +25,7 @@ public class BookController {
     }
 
     @PostMapping
+    @AutoLog("図書情報を追加する")
     public Result save(@RequestBody Book book) {
 //        if (book.getId() == null) {
 //            bookService.add(book);
@@ -46,7 +47,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
-    @AutoLog("删除图书信息")
+    @AutoLog("図書情報を削除する")
     public Result delete(@PathVariable Integer id) {
         bookService.delete(id);
         return Result.success();
