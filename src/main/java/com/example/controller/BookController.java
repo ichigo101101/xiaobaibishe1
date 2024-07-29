@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.common.AutoLog;
 import com.example.common.Result;
 import com.example.entity.Book;
 import com.example.entity.Params;
@@ -45,6 +46,7 @@ public class BookController {
     }
 
     @DeleteMapping("/{id}")
+    @AutoLog("删除图书信息")
     public Result delete(@PathVariable Integer id) {
         bookService.delete(id);
         return Result.success();
