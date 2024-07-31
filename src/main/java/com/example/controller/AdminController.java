@@ -1,60 +1,61 @@
 package com.example.controller;
+
 import com.example.common.AutoLog;
+import com.example.common.CaptchaUtilAdapter;
+import com.example.common.CaptureConfig;
 import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.entity.Params;
 import com.example.exception.CustomException;
 import com.example.service.AdminService;
 import com.github.pagehelper.PageInfo;
+import com.wf.captcha.utils.CaptchaUtil;
 import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @CrossOrigin
 @RestController
-//表明是个接口的入口
-//controller是后台接口的入口，这个“接口”跟我们学习Java基础里面的“接口interface”是有区别，
-// 我们这里的接口是针对于前端来说的，前端操作数据会调用后台的接口，前后台交互的入口
-@RequestMapping ("/admin")
-//入口的钥匙，匹配到一个地址
+@RequestMapping("/admin")
 public class AdminController {
-    /*
-    *controller里的一个方法，它其实就是我们平常说的web项目的一个接口的入口
-    *可以在这个方法上加一个url
-    * 也可以指定请求方式， POST 增  DELETE 删  PUT 改 GET 查
-    * */
 
     private static final Logger log = LoggerFactory.getLogger(AdminController.class);
 
-    @Resource //引入Java bean
-    private AdminService adminService; // Controller调用service，service调用dao
+    @Resource
+    private AdminService adminService;
 
     @PostMapping("/login")
 //    @AutoLog("システムにログインする")
-    public Result login(@RequestBody Admin admin) {
-//        Admin loginUser = adminService.login(admin);
-//        return Result.success(loginUser);
+    public Result login(@RequestBody Admin admin, @RequestParam String key, HttpServletRequest request) {
+        // 获取验证码
+        String verCode = admin.getVerCode();
+
+        // 验证验证码是否为空
+        if (verCode == null || !verCode.toLowerCase().equals(CaptureConfig.CAPTURE_MAP.get(key))) {
+            // 如果验证码为空或不相等，说明验证不通过
+            CaptchaUtilAdapter.clear(request);
+            return Result.error("認証コードが正しくありません");
+        }
+
         try {
             Admin loginUser = adminService.login(admin);
+            CaptureConfig.CAPTURE_MAP.remove(key);
             return Result.success(loginUser);
         } catch (CustomException e) {
-            return Result.error(e.getMsg()); // 返回自定义异常信息给前端
+            return Result.error(e.getMsg());
         }
     }
 
-
     @PostMapping("/register")
     public Result register(@RequestBody Admin admin) {
-//        adminService.add(admin);
-//        return Result.success();
         try {
             adminService.add(admin);
             return Result.success();
         } catch (CustomException e) {
-            return Result.error(e.getMsg()); // 返回自定义异常信息给前端
+            return Result.error(e.getMsg());
         }
     }
 
@@ -73,12 +74,6 @@ public class AdminController {
 
     @PostMapping
     public Result save(@RequestBody Admin admin) {
-//        if (admin.getId() == null) {
-//            adminService.add(admin);
-//        } else {
-//            adminService.update(admin);
-//        }
-//        return Result.success();
         try {
             if (admin.getId() == null) {
                 adminService.add(admin);
@@ -96,17 +91,4 @@ public class AdminController {
         adminService.delete(id);
         return Result.success();
     }
-
-
-
-//    @GetMapping("/start")
-//    public  String start(){
-//        return "欢迎！springboot启动!";
-//    }
-//
-//    @GetMapping("/")
-//    public List<Admin> getUser() {
-//        return adminService.getUser();
-//    }
-
 }

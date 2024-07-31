@@ -13,18 +13,24 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>demo101</name>
     <description>Demo project for Spring Boot</description>
-    <url/>
+    <url>http://www.example.com</url>
     <licenses>
-        <license/>
+        <license>
+            <name>Apache 2.0 License</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
     </licenses>
     <developers>
-        <developer/>
+        <developer>
+            <id>developer1</id>
+            <name>John Doe</name>
+            <email>john.doe@example.com</email>
+        </developer>
     </developers>
     <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
+        <connection>scm:git:git://github.com/example/demo101.git</connection>
+        <developerConnection>scm:git:ssh://github.com/example/demo101.git</developerConnection>
+        <url>https://github.com/example/demo101</url>
     </scm>
     <properties>
         <java.version>21</java.version>
@@ -33,28 +39,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.3.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-<!--            <scope>test</scope>-->
-            <version>3.3.1</version>
+            <scope>test</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--            <version>1.3.2</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.13</version>
         </dependency>
 
-        <!--mybatis框架，封装了一些常用的增删改查方法-->
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper</artifactId>
@@ -78,6 +76,7 @@
             <artifactId>java-jwt</artifactId>
             <version>3.10.3</version>
         </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -89,12 +88,19 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.apache.poi</groupId>-->
-<!--            <artifactId>poi-ooxml</artifactId>-->
-<!--            <version>4.1.2</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>1.6.2</version>
+        </dependency>
 
+        <!-- Jakarta Servlet API -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -102,9 +108,8 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.6.1</version>
+                <version>3.3.1</version>
             </plugin>
         </plugins>
     </build>
-
 </project>

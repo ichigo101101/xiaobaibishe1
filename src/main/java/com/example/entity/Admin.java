@@ -22,6 +22,8 @@ public class Admin {
     private String phone;
     @Transient
     private String token;
+    @Transient
+    private String verCode;
 
     @Column(name = "role")
     private String role;
@@ -88,5 +90,13 @@ public class Admin {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getVerCode() {
+        return verCode;
+    }
+
+    public void setVerCode(String verCode) {
+        this.verCode = verCode;
     }
 }
