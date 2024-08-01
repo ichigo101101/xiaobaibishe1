@@ -30,15 +30,15 @@ public class AdminController {
     @PostMapping("/login")
 //    @AutoLog("システムにログインする")
     public Result login(@RequestBody Admin admin, @RequestParam String key, HttpServletRequest request) {
-        // 获取验证码
-        String verCode = admin.getVerCode();
-
-        // 验证验证码是否为空
-        if (verCode == null || !verCode.toLowerCase().equals(CaptureConfig.CAPTURE_MAP.get(key))) {
-            // 如果验证码为空或不相等，说明验证不通过
-            CaptchaUtilAdapter.clear(request);
-            return Result.error("認証コードが正しくありません");
-        }
+//        // 获取验证码
+//        String verCode = admin.getVerCode();
+//
+//        // 验证验证码是否为空
+//        if (verCode == null || !verCode.toLowerCase().equals(CaptureConfig.CAPTURE_MAP.get(key))) {
+//            // 如果验证码为空或不相等，说明验证不通过
+//            CaptchaUtilAdapter.clear(request);
+//            return Result.error("認証コードが正しくありません");
+//        }
 
         try {
             Admin loginUser = adminService.login(admin);
