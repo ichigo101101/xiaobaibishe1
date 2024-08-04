@@ -1,6 +1,5 @@
 package com.example.common;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -62,19 +62,15 @@
 //        }
 //    }
 //}
-
 package com.example.common;
-
 import java.awt.Font;
 import java.io.IOException;
 import java.lang.reflect.Method;
-
 import com.wf.captcha.base.Captcha;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public class CaptchaUtilAdapter {
 
