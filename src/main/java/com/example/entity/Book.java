@@ -23,7 +23,7 @@ public class Book {
     private Integer typeId;
 
     @Column(name = "content")
-    private Integer Content;
+    private String Content;
 
     @Transient
     private String typeName;
@@ -92,11 +92,11 @@ public class Book {
         this.img = img;
     }
 
-    public Integer getContent() {
+    public String getContent() {
         return Content;
     }
 
-    public void setContent(Integer content) {
+    public void setContent(String content) {
         Content = content;
     }
 }
